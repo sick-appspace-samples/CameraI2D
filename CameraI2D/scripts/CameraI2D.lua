@@ -38,8 +38,7 @@ Image.Provider.RemoteCamera.setIPAddress(cam1, CAM1_IP)
 Image.Provider.RemoteCamera.setConfig(cam1, config)
 
 -- Creation View handle
-local viewer = View.create()
-viewer:setID('viewer2D')
+local viewer = View.create('viewer2D1')
 
 --End of Global Scope-----------------------------------------------------------
 
