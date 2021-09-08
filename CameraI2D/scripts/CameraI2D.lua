@@ -1,23 +1,8 @@
---[[----------------------------------------------------------------------------
 
-  Application Name: CameraI2D
-
-  Description:
-  Configuration of I2D camera and image acquisition
-
-  This sample shows the configuration of any I2D camera (picoCam/midiCam) connected
-  to a SIM4000. The configuration of the camera is made in the global scope.
-  The camera is then connected and started after the 'Engine.OnStarted' event
-  occurred. The images can be viewed in the 2D Viewer of the SIM or the emulator.
-  Additional information is printed to the console.
-  To show this sample an I2D camera has to be connected correctly to the SIM4000.
-  The IP address of the camera has to match the one in this script.
-
-------------------------------------------------------------------------------]]
 --Start of Global Scope---------------------------------------------------------
 
 -- IP address of the connected camera, has to match the actual camera
-local CAM1_IP = '192.168.0.100'
+local CAM1_IP = '192.168.1.100'
 
 -- Creation of configuration handle
 local config = Image.Provider.RemoteCamera.I2DConfig.create()
@@ -62,8 +47,13 @@ Script.register('Engine.OnStarted', main)
 --This function is called when the 'OnNewImage' event is raised
 --@handleOnNewImage(image:Image,sensordata:SensorData)
 local function handleOnNewImage(image, sensordata)
-  -- Viewing the image on built in 2D Viewer of the device/emulator
-  View.view(viewer, image)
+  -- clear view from previously displayed pictures
+  viewer:clear()
+  -- push the new image to the view (NOT the same as acctually displaying it!)
+  viewer:addImage(image)
+  -- re-render the acctual view to present the new picture
+  viewer:present()
+
   -- Printing the additional sensor data to the console
   print('Timestamp: ' .. SensorData.getTimestamp(sensordata))
   print('Frame number: ' .. SensorData.getFrameNumber(sensordata))
