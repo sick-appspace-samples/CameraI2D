@@ -29,8 +29,7 @@ local viewer = View.create('viewer2D1')
 
 --Start of Function and Event Scope---------------------------------------------
 
---Declaration of the 'main' function as an entry point for the event loop
---@main()
+---Declaration of the 'main' function as an entry point for the event loop
 local function main()
   -- Connection to camera. When the camera can connect, starting the acquisition
   local isConnected = Image.Provider.RemoteCamera.connect(cam1)
@@ -44,8 +43,9 @@ end
 --Registration of the 'main' function to the 'Engine.OnStarted' event
 Script.register('Engine.OnStarted', main)
 
---This function is called when the 'OnNewImage' event is raised
---@handleOnNewImage(image:Image,sensordata:SensorData)
+---This function is called when the 'OnNewImage' event is raised
+---@param  image Image
+---@param sensordata SensorData
 local function handleOnNewImage(image, sensordata)
   -- clear view from previously displayed pictures
   viewer:clear()
